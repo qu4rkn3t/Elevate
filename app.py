@@ -121,20 +121,4 @@ def results():
 
 
 if __name__ == '__main__':
-    # app.run(debug=True)
-    alpaca_client = AlpacaAPIClient(
-        api_key=Alpaca.APCA_API_KEY_ID,
-        secret_key=Alpaca.APCA_API_SECRET_KEY
-    )
-    random_date = generate_random_date(start_year=2020, end_year=2024)
-    symbol = random.choice(sp500_top_100)
-    stock_data = alpaca_client.get_stock_data(symbol, random_date)
-    print(stock_data)
-    open_price = stock_data['bars'][0]['c']
-    closing_price = stock_data['bars'][-1]['c']
-    percent_change = (abs(closing_price - open_price) / open_price) * 100
-    print(f'Opening Price: {open_price}\n Closing Price: {closing_price}\n Percent Change: {percent_change}')
-    news_data = alpaca_client.get_news_data(symbol, random_date)
-    sentiment = get_sentiment(news_data)
-    print(news_data)
-    print(f'Sentiment: {sentiment}')
+    app.run(debug=True)
