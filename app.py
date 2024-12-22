@@ -139,10 +139,10 @@ def game():
     res = {
         'symbol': symbol,
         'closing_price': closing_price,
-        'percent_change': percent_change,
+        'percent_change': str(round(percent_change, 2)),
         'sentiment': str(round(sentiment, 2)),
-        'simple_moving_average': indicator.simple_moving_average(),
-        'average_true_range': indicator.average_true_range()
+        'simple_moving_average': str(round(indicator.simple_moving_average(), 2)),
+        'average_true_range': str(round(indicator.average_true_range(), 2))
     }
     return render_template('game.html', res=res)
 
