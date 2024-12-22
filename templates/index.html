@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Prediction Game</title>
     <style>
-        /* General Styles */
+        
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -24,7 +24,31 @@
             position: relative;
         }
         
-        /* Page 1 - Start Screen */
+        .rules {
+            background: #3a3a3a;
+            padding: 20px 40px;
+            border-radius: 10px;
+            margin: 20px 0;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .rules h2 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .rules ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .rules li {
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
         #page1 {
             background: #2f2f2f;
         }
@@ -59,8 +83,19 @@
 <body>
     <section id="page1" class="page">
         <h1>Stock Prediction Game</h1>
-        <p>A financial game that trains a player's predictive capability on deciding whether to buy a stock or not.</p>
-        <button id="start-btn">Start</button>
+    <p>A financial game that trains a player's predictive capability on deciding whether to buy a stock or not.</p>
+    
+    <div class="rules">
+        <h2>Rules:</h2>
+        <ol>
+            <li>Buy or Sell Decision: Analyze the stock's sentiment score, price trends, and news indicators to decide whether to Buy or Sell.</li>
+            <li>Try to pick up on patterns.</li>
+            <li>Press play again for more rounds.</li>
+            <li>Have fun!</li>
+        </ol>
+    </div>
+
+    <button id="start-btn">Start</button>
     </section>
 
     <script>
