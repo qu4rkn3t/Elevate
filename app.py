@@ -144,7 +144,7 @@ def aggregate_bars(stock_bars, period='1H'):
     return resampled.to_dict(orient='records')
 
 
-def plot_data(stock_bars, symbol):
+def plot_data(stock_bars, symbol, path):
     aggregated_bars = aggregate_bars(stock_bars)
     timestamps = [bar['t'] for bar in aggregated_bars]
     plt.style.use('dark_background')
@@ -166,7 +166,7 @@ def plot_data(stock_bars, symbol):
     ax.grid(color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
     fig.patch.set_facecolor('black')
     plt.tight_layout()
-    plt.savefig('static/graph.png', dpi=300)
+    plt.savefig(f'static/{path}', dpi=300)
     plt.close(fig)
 
 
@@ -179,9 +179,11 @@ def home():
 def game():
     if request.method == 'POST':
         choice = request.form.get('choice')
+        print(choice)
         win = True
         if (choice == 'buy' and constant.get_price2() < constant.get_price1()) or (choice == 'sell' and constant.get_price2() > constant.get_price1()):
             win = False
+        print(win)
         return redirect(url_for('results', win=win))
     alpaca_client = AlpacaAPIClient(
         api_key=Alpaca.APCA_API_KEY_ID,
@@ -207,22 +209,23 @@ def game():
         constant.set_price2(max(constant.PRICE2, bar['h']))
     percent_change = (abs(closing_price - open_price) / open_price) * 100
     sentiment = get_sentiment(news_data['news'])
-    plot_data(stock_bars=stock_data['bars'], symbol=symbol)
+    plot_data(stock_bars=stock_data['bars'], symbol=symbol, path='graph1.png')
+    plot_data(stock_bars=stock_data2['bars'], symbol=symbol, path='graph2.png')
     res = {
         'symbol': symbol,
         'closing_price': closing_price,
-        'percent_change': str(round(percent_change, 2)),
-        'sentiment': str(round(sentiment, 2)),
-        'simple_moving_average': str(round(indicator.simple_moving_average(), 2)),
-        'average_true_range': str(round(indicator.average_true_range(), 2))
+        'percent_change': float(str(round(percent_change, 2))),
+        'sentiment': float(str(round(sentiment, 2))),
+        'simple_moving_average': float(str(round(indicator.simple_moving_average(), 2))),
+        'average_true_range': float(str(round(indicator.average_true_range(), 2)))
     }
     return render_template('game.html', res=res, plot_url=url_for('static', filename='graph.png'))
 
 
 @app.route('/results')
 def results():
-    correct = request.args.get('correct', 'false')
-    return render_template('results.html', correct == correct)
+    win = request.args.get('win', 'false').lower() == 'true'
+    return render_template('results.html', win=win, price1=constant.get_price1(), price2=constant.get_price2())
 
 
 if __name__ == '__main__':
