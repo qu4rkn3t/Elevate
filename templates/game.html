@@ -151,11 +151,11 @@
             <div id="stock-change" class="stock-change">
               {% if res['percent_change'] > 0 %}
               <ion-icon name="caret-up-outline" style="color: green"></ion-icon
-              ><span style="color: green">{{ res['percent_change'] }}</span>
+              ><span style="color: green">{{ res['percent_change'] }}%</span>
               {% elif res['percent_change'] < 0 %}
               <ion-icon name="caret-down-outline" style="color: red"></ion-icon
-              ><span style="color: red">{{ res['percent_change'] }}</span>
-              {% else %} {{ res['percent_change'] }} {% endif %}
+              ><span style="color: red">{{ res['percent_change'] }}%</span>
+              {% else %} {{ res['percent_change'] }}% {% endif %}
             </div>
           </div>
         </div>
