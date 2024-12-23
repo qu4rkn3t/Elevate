@@ -62,21 +62,17 @@
       .learn-more ul {
         list-style: none;
         padding: 0;
-    }
+      }
 
-    .learn-more li {
-        margin-bottom: 12px;
-    }
-
-    .learn-more a {
+      .learn-more li {
         color: #3b82f6;
-        text-decoration: none;
-        transition: color 0.2s;
-    }
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
 
-    .learn-more a:hover {
-        color: #b6beb7;
-    }
+      .learn-more li:hover {
+        color: #60a5fa;
+      }
 
       .play-again {
         background-color: #3b82f6;
@@ -91,6 +87,12 @@
 
       .play-again:hover {
         background-color: #2563eb;
+      }
+      a:link,
+      a:visited,
+      a:hover,
+      a:active {
+        color: #3b82f6;
       }
     </style>
   </head>
@@ -124,12 +126,48 @@
       <div class="learn-more">
         <h2>Learn more about investing:</h2>
         <ul>
-            <li><a href="https://www.investopedia.com/terms/s/sma.asp" target="_blank">- SMA</a></li>
-            <li><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/atr" target="_blank">- True Range</a></li>
-            <li><a href="https://www.strike.money/technical-analysis/sentiment-analysis" target="_blank">- Sentiment analysis</a></li>
-            <li><a href="https://www.geeksforgeeks.org/what-is-sentiment-analysis/" target="_blank">- What is Sentiment analysis</a></li>
-            <li><a href="https://www.investopedia.com/trading/candlestick-charting-what-is-it/" target="_blank">- Candle Chart</a></li>
-            <li><a href="https://www.clevergirlfinance.com/how-to-start-investing/" target="_blank">- Start Investing</a></li>
+          <li>
+            <a
+              href="https://www.investopedia.com/terms/s/sma.asp"
+              target="_blank"
+              >- SMA</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/atr"
+              target="_blank"
+              >- True Range</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.strike.money/technical-analysis/sentiment-analysis"
+              target="_blank"
+              >- Sentiment analysis</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.geeksforgeeks.org/what-is-sentiment-analysis/"
+              target="_blank"
+              >- What is Sentiment analysis</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.investopedia.com/trading/candlestick-charting-what-is-it/"
+              target="_blank"
+              >- Candle Chart</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.clevergirlfinance.com/how-to-start-investing/"
+              target="_blank"
+              >- Start Investing</a
+            >
+          </li>
         </ul>
       </div>
       <button class="play-again" onclick="window.location.href='/game'">
