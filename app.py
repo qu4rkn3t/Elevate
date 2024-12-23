@@ -193,10 +193,7 @@ def game():
     open_price = stock_data['bars'][0]['c']
     closing_price = stock_data['bars'][-1]['c']
     constant.PRICE1 = closing_price
-    constant.PRICE2 = stock_data2['bars'][0]['c']
-    for bar in stock_data2['bars']:
-        constant.PRICE2 = max(constant.PRICE2, bar['c'])
-    print(constant.PRICE2)
+    constant.PRICE2 = stock_data2['bars'][-1]['c']
     percent_change = (closing_price - open_price) / open_price * 100
     sentiment = get_sentiment(news_data['news'])
     plot_data(stock_bars=stock_data['bars'], symbol=symbol, path='graph1.png')
