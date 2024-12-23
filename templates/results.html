@@ -1,106 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
     <title>Stock Prediction Game</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #2f2f2f;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #2f2f2f;
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .container {
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+      .container {
+        text-align: center;
+        padding: 20px;
+        width: 100%;
+        max-width: 800px;
+      }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
 
-        .next-day-text {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
+      .next-day-text {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
 
-        .graph-placeholder {
-            height: 200px;
-            background-color: #444;
-            border-radius: 10px;
-            margin: 0 auto 2rem auto;
-            width: 90%;
-        }
+      .graph-placeholder {
+        height: 200px;
+        border-radius: 10px;
+        margin: 0 auto 2rem auto;
+        width: 90%;
+      }
 
-        .learn-more {
-            text-align: left;
-            margin-bottom: 2rem;
-            padding-left: 5%;
-        }
+      .learn-more {
+        text-align: left;
+        margin-bottom: 2rem;
+        padding-left: 5%;
+      }
 
-        .learn-more h2 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
+      .learn-more h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
 
-        .learn-more ul {
-            list-style: none;
-            padding: 0;
-        }
+      .learn-more ul {
+        list-style: none;
+        padding: 0;
+      }
 
-        .learn-more li {
-            color: #3b82f6;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-        }
+      .learn-more li {
+        color: #3b82f6;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
 
-        .learn-more li:hover {
-            color: #60a5fa;
-        }
+      .learn-more li:hover {
+        color: #60a5fa;
+      }
 
-        .play-again {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 12px 40px;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .play-again {
+        background-color: #3b82f6;
+        color: white;
+        border: none;
+        padding: 12px 40px;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .play-again:hover {
-            background-color: #2563eb;
-        }
+      .play-again:hover {
+        background-color: #2563eb;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>You Won/Lost</h1>
-        <div class="next-day-text">
-            The next-day high was: 
+      {% if win == True %}
+      <h1 style="color: green">You won!</h1>
+      {% else %}
+      <h1 style="color: red">You lost! {% endif %}</h1>
+      <div class="next-day-text">
+        Closing Price: ${{ price2 }}
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          {% if percent_change > 0 %}
+          <ion-icon name="caret-up-outline" style="color: green"></ion-icon
+          ><span style="color: green">{{ percent_change }}%</span>
+          {% elif percent_change < 0 %}
+          <ion-icon name="caret-down-outline" style="color: red"></ion-icon
+          ><span style="color: red">{{ percent_change }}%</span>
+          {% else %} {{ percent_change }}% {% endif %}
         </div>
-        <div class="graph-placeholder"></div>
-        <div class="learn-more">
-            <h2>Learn more about investing:</h2>
-            <ul>
-                <li>- Link 1</li>
-                <li>- Link 2</li>
-                <li>- Link 3</li>
-            </ul>
-        </div>
-        <button class="play-again" onclick="window.location.href='/game'">
-            Play Again
-        </button>
+      </div>
+      <div class="graph-placeholder">
+        <img
+          src="{{ plot_url }}"
+          alt="Stock Graph"
+          style="max-height: 100%; max-width: 100%"
+        />
+      </div>
+      <div class="learn-more">
+        <h2>Learn more about investing:</h2>
+        <ul>
+          <li>- Link 1</li>
+          <li>- Link 2</li>
+          <li>- Link 3</li>
+        </ul>
+      </div>
+      <button class="play-again" onclick="window.location.href='/game'">
+        Play Again
+      </button>
     </div>
-</body>
+  </body>
 </html>
