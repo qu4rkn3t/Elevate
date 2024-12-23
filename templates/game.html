@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Game</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <title>Elevate</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #2f2f2f;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .page {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .stock-container {
-            width: 90%;
-            max-width: 1200px;
-            background: #3a3a3a;
-            padding: 30px;
-            border-radius: 15px;
-        }
-        
-        .stock-info {
-            font-size: 2.5em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .stock-change {
-            font-size: 0.8em;
-        }
-        
-        .top-content {
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #2f2f2f;
+        color: #fff;
+        overflow: hidden;
+      }
+      .page {
+        height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
+      }
+      .stock-container {
+        width: 90%;
+        max-width: 1200px;
+        background: #3a3a3a;
+        padding: 30px;
+        border-radius: 15px;
+      }
+      .stock-info {
+        font-size: 2.5em;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      .stock-change {
+        font-size: 0.8em;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .top-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 30px;
         margin: 30px auto;
         width: 80%;
         max-width: 600px;
-    }
-    
-    .sentiment {
+      }
+      .sentiment {
         background: #444;
         padding: 30px;
         border-radius: 10px;
@@ -61,9 +67,8 @@
         font-size: 2em;
         width: 80px;
         flex-shrink: 0;
-    }
-    
-    .indicators {
+      }
+      .indicators {
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -71,107 +76,124 @@
         padding: 20px;
         border-radius: 10px;
         width: 250px;
-    }
-    
-    .indicator {
+      }
+      .indicator {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 12px 20px;
         background: #555;
         border-radius: 5px;
-    }
-        
-    .chart {
+      }
+      .chart {
         width: 80%;
         max-width: 800px;
         height: 300px;
-        background: #444;
         border-radius: 10px;
         margin: 30px auto;
-    }
-        
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        button {
-            padding: 15px 40px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            min-width: 150px;
-            transition: opacity 0.3s;
-        }
-        
-        button:hover {
-            opacity: 0.9;
-        }
-        
-        .buy {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        .sell {
-            background: #f44336;
-            color: white;
-        }
-        
-        .positive { color: #4CAF50; }
-        .negative { color: #f44336; }
-        .neutral { color: #FFC107; }
-
-    form{
+        overflow: hidden;
         display: flex;
         justify-content: center;
-        gap:20px;
-        width: 100%;
-    }
-    </style>
-</head>
-<body>
-    <div class="page">
-        <div class="stock-container">
-            <div class="stock-info">
-                <div id="stock-symbol">Testing</div>
-                <div id="stock-change" class="stock-change"></div>
-            </div>
-            
-            <div class="top-content">
-                <div class="sentiment" id="sentiment">-</div>
-                <div class="indicators-grid">
-                    <div class="indicator-box">
-                        <div class="indicator-title">Simple Moving Average</div>
-                        <div id="SMA-value" class="indicator-value">-</div>
-                    </div>
-                    <div class="indicator-box">
-                        <div class="indicator-title">True Range</div>
-                        <div id="TR-value" class="indicator-value">-</div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="chart" id="chart"></div>
-            
-            <div class="actions">
-                <form method="POST" action="/game">
-                    <button type="submit" name="choice" value="buy" class="buy">BUY</button>
-                    <button type="submit" name="choice" value="sell" class="sell">SELL</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        document.getElementById('buy-btn').addEventListener('click', () => {
-            window.location.href = '/results';
-        });
+        align-items: center;
+      }
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      button {
+        padding: 15px 40px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        min-width: 150px;
+        transition: opacity 0.3s;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
 
-        document.getElementById('sell-btn').addEventListener('click', () => {
-            window.location.href = '/results';
-        });
-    </script>
+      .buy {
+        background: #4caf50;
+        color: white;
+      }
+      .sell {
+        background: #f44336;
+        color: white;
+      }
+      .positive {
+        color: #4caf50;
+      }
+      .negative {
+        color: #f44336;
+      }
+      .neutral {
+        color: #ffc107;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="stock-container">
+        <div class="stock-info">
+          <div id="stock-symbol">{{ res['symbol'] }}</div>
+          <div
+            style="display: flex; justify-content: center; align-items: center"
+          >
+            ${{ res['closing_price'] }}
+            <div id="stock-change" class="stock-change">
+              {% if res['percent_change'] > 0 %}
+              <ion-icon name="caret-up-outline" style="color: green"></ion-icon
+              ><span style="color: green">{{ res['percent_change'] }}</span>
+              {% elif res['percent_change'] < 0 %}
+              <ion-icon name="caret-down-outline" style="color: red"></ion-icon
+              ><span style="color: red">{{ res['percent_change'] }}</span>
+              {% else %} {{ res['percent_change'] }} {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="top-content">
+          <div class="sentiment" id="sentiment">{{ res['sentiment'] }}</div>
+          <div class="indicators-grid">
+            <div class="indicator-box">
+              <div class="indicator-title">Simple Moving Average</div>
+              <div id="SMA-value" class="indicator-value">
+                {{ res['simple_moving_average'] }}
+              </div>
+            </div>
+            <div class="indicator-box">
+              <div class="indicator-title">Average True Range</div>
+              <div id="TR-value" class="indicator-value">
+                {{ res['average_true_range'] }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chart" id="chart">
+          <img
+            src="{{ plot_url }}"
+            alt="Stock Graph"
+            style="max-height: 100%; max-width: 100%"
+          />
+        </div>
+        <div class="actions">
+          <form method="POST" action="/game">
+            <button type="submit" name="choice" value="buy" class="buy">
+              BUY
+            </button>
+            <button type="submit" name="choice" value="sell" class="sell">
+              SELL
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
