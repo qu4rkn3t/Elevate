@@ -62,17 +62,21 @@
       .learn-more ul {
         list-style: none;
         padding: 0;
-      }
+    }
 
-      .learn-more li {
+    .learn-more li {
+        margin-bottom: 12px;
+    }
+
+    .learn-more a {
         color: #3b82f6;
-        margin-bottom: 0.5rem;
-        cursor: pointer;
-      }
+        text-decoration: none;
+        transition: color 0.2s;
+    }
 
-      .learn-more li:hover {
-        color: #60a5fa;
-      }
+    .learn-more a:hover {
+        color: #b6beb7;
+    }
 
       .play-again {
         background-color: #3b82f6;
@@ -120,9 +124,12 @@
       <div class="learn-more">
         <h2>Learn more about investing:</h2>
         <ul>
-          <li>- Link 1</li>
-          <li>- Link 2</li>
-          <li>- Link 3</li>
+            <li><a href="https://www.investopedia.com/terms/s/sma.asp" target="_blank">- SMA</a></li>
+            <li><a href="https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/atr" target="_blank">- True Range</a></li>
+            <li><a href="https://www.strike.money/technical-analysis/sentiment-analysis" target="_blank">- Sentiment analysis</a></li>
+            <li><a href="https://www.geeksforgeeks.org/what-is-sentiment-analysis/" target="_blank">- What is Sentiment analysis</a></li>
+            <li><a href="https://www.investopedia.com/trading/candlestick-charting-what-is-it/" target="_blank">- Candle Chart</a></li>
+            <li><a href="https://www.clevergirlfinance.com/how-to-start-investing/" target="_blank">- Start Investing</a></li>
         </ul>
       </div>
       <button class="play-again" onclick="window.location.href='/game'">
