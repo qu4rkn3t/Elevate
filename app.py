@@ -23,18 +23,6 @@ class CONSTANTS:
         self.PRICE1 = -1
         self.PRICE2 = -1
 
-    def get_price1(self):
-        return self.PRICE1
-
-    def set_price1(self, value):
-        self.PRICE1 = value
-    
-    def get_price2(self):
-        return self.PRICE2
-
-    def set_price2(self, value):
-        self.PRICE2 = value
-
 
 class AlpacaAPIClient:
     def __init__(self, api_key: str, secret_key: str):
@@ -181,7 +169,7 @@ def game():
         choice = request.form.get('choice')
         print(choice)
         win = True
-        if (choice == 'buy' and constant.get_price2() < constant.get_price1()) or (choice == 'sell' and constant.get_price2() > constant.get_price1()):
+        if (choice == 'buy' and constant.PRICE2 < constant.PRICE1) or (choice == 'sell' and constant.PRICE2 > constant.PRICE1):
             win = False
         print(win)
         return redirect(url_for('results', win=win))
@@ -204,10 +192,12 @@ def game():
     indicator = Indicators(stock_data['bars'])
     open_price = stock_data['bars'][0]['c']
     closing_price = stock_data['bars'][-1]['c']
-    constant.set_price1(closing_price)
+    constant.PRICE1 = closing_price
+    constant.PRICE2 = stock_data2['bars'][0]['c']
     for bar in stock_data2['bars']:
-        constant.set_price2(max(constant.PRICE2, bar['h']))
-    percent_change = (abs(closing_price - open_price) / open_price) * 100
+        constant.PRICE2 = max(constant.PRICE2, bar['c'])
+    print(constant.PRICE2)
+    percent_change = (closing_price - open_price) / open_price * 100
     sentiment = get_sentiment(news_data['news'])
     plot_data(stock_bars=stock_data['bars'], symbol=symbol, path='graph1.png')
     plot_data(stock_bars=stock_data2['bars'], symbol=symbol, path='graph2.png')
@@ -219,13 +209,14 @@ def game():
         'simple_moving_average': float(str(round(indicator.simple_moving_average(), 2))),
         'average_true_range': float(str(round(indicator.average_true_range(), 2)))
     }
-    return render_template('game.html', res=res, plot_url=url_for('static', filename='graph.png'))
+    return render_template('game.html', res=res, plot_url=url_for('static', filename='graph1.png'))
 
 
 @app.route('/results')
 def results():
     win = request.args.get('win', 'false').lower() == 'true'
-    return render_template('results.html', win=win, price1=constant.get_price1(), price2=constant.get_price2())
+    percent_change = float(str(round((constant.PRICE2 - constant.PRICE1) / constant.PRICE1 * 100, 2)))
+    return render_template('results.html', win=win, price1=constant.PRICE1, price2=constant.PRICE2, percent_change=percent_change, plot_url=url_for('static', filename='graph2.png'))
 
 
 if __name__ == '__main__':
